@@ -29,6 +29,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Page<Product> findAllPaged(Pageable pageable) {
+        var x = productRepository.findAll(pageable);
         return this.productRepository.findAll(pageable)
                 .map(ProductFactory::fromJpaToDomain);
     }

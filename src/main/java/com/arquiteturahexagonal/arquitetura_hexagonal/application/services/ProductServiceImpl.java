@@ -1,5 +1,6 @@
 package com.arquiteturahexagonal.arquitetura_hexagonal.application.services;
 
+import com.arquiteturahexagonal.arquitetura_hexagonal.adapters.outbound.factory.ProductFactory;
 import com.arquiteturahexagonal.arquitetura_hexagonal.application.usecases.ProductUseCase;
 import com.arquiteturahexagonal.arquitetura_hexagonal.domain.product.Product;
 import com.arquiteturahexagonal.arquitetura_hexagonal.domain.product.ProductDTO;
@@ -40,10 +41,7 @@ public class ProductServiceImpl implements ProductUseCase {
 
     @Transactional
     public ProductDTO createProduct(ProductDTO dto) {
-        Product entity = new Product();
-        //Set attributes that you need
-
-        entity = repository.save(entity);
+        var entity = repository.save(ProductFactory.fromDtoToDomain(dto));
         return ProductDTO.fromEntityToDto(entity);
     }
 
